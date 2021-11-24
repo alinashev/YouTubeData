@@ -1,5 +1,9 @@
+from ChannelDataExtractor import ChannelDataExtractor
+from ChannelsID import ChannelsID
+
+
 def main():
-    pass
+    extractor_channels = ChannelDataExtractor(ChannelsID)
 
 
 if __name__ == '__main__':
