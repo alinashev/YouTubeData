@@ -15,7 +15,7 @@ class VideoDataExtractor:
     def __init__(self, ChannelsID):
         self.ChannelsID = ChannelsID
 
-
+    @classmethod
     def videos_url_build(cls, channelId):
         cls.__url = cls.__base_url \
                 + 'search?' \
