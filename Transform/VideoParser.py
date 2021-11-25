@@ -10,7 +10,7 @@ class VideoParser(Parser):
                       None,
                       json_string[channelID.name]['items'][i]['snippet']['publishedAt'],
                       json_string[channelID.name]['items'][i]['snippet']['title'],
-                      json_string[channelID.name]['items'][i]['snippet']['description']
+                      None
                       )
                 for channelID in ChannelsID
                 for i in range(0, 5)]

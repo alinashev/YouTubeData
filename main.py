@@ -2,21 +2,26 @@ import logging
 from datetime import datetime
 
 from ChannelsID import ChannelsID
+from Commons.DataBase import DataBase
 from Commons.FileWriter import FileWriter
 from Commons.ReaderJSON import ReaderJSON
 from Commons.StorageS3 import StorageS3
 from Extract.ChannelDataExtractor import ChannelDataExtractor
 from Extract.VideoDataExtractor import VideoDataExtractor
+from Load.ChannelLoader import ChannelLoader
+from Load.VideoLoader import VideoLoader
+from Transform.ChannelParser import ChannelParser
+from Transform.VideoParser import VideoParser
 
 
 def main():
     time = datetime.utcnow()
     log_file_name = 'YouTubeData-{year}-{month}-{day}UTC{hour}-{minute}-{second}.log'.format(year=time.year,
-                                                                                 month=time.month,
-                                                                                 day=time.day,
-                                                                                 hour=time.hour,
-                                                                                 minute=time.minute,
-                                                                                 second=time.second)
+                                                                                             month=time.month,
+                                                                                             day=time.day,
+                                                                                             hour=time.hour,
+                                                                                             minute=time.minute,
+                                                                                             second=time.second)
 
     logging.basicConfig(level=logging.INFO, filename=log_file_name, filemode='w',
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -42,6 +47,11 @@ def main():
 
     json_channels = reader_channel.get_json()
     json_video = reader_video.get_json()
+
+    ChannelLoader().loading_to_DWH(ChannelParser().parse_to_obj(json_channels))
+    VideoLoader().loading_to_DWH(VideoParser().parse_to_obj(json_video))
+
+    DataBase.close()
 
 
 if __name__ == '__main__':
