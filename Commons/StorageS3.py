@@ -1,3 +1,4 @@
+import logging
 import os
 import boto3
 import settings
@@ -22,6 +23,7 @@ class StorageS3:
             if obj.key[-1] == '/':
                 continue
             bucket.download_file(obj.key, self.__path)
+            logging.info("Data downloaded from S3")
 
     @staticmethod
     def get_path_list(directory):
@@ -31,3 +33,4 @@ class StorageS3:
     def load_file_to_s3(self, file_name):
         self.__s3.meta.client.upload_file(file_name, self.__bucket_name,
                                           'Resources/Lake/jsonTypesFile/YouTube/{name}'.format(name=file_name))
+        logging.info("Pulled data has been loaded into S3")

@@ -1,3 +1,5 @@
+import logging
+
 import settings
 from googleapiclient.discovery import build
 
@@ -17,5 +19,6 @@ class ChannelDataExtractor(DataExtractor):
             )
             response = request.execute()
             list_req.append(response)
+        logging.info("Data about channels pulled")
         return dict(zip(list(map(lambda c: c.name, ChannelsID)), list_req))
 

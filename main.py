@@ -1,13 +1,26 @@
+import logging
+from datetime import datetime
+
 from ChannelsID import ChannelsID
 from Commons.FileWriter import FileWriter
 from Commons.ReaderJSON import ReaderJSON
 from Commons.StorageS3 import StorageS3
 from Extract.ChannelDataExtractor import ChannelDataExtractor
 from Extract.VideoDataExtractor import VideoDataExtractor
-from Transform.VideoParser import VideoParser
 
 
 def main():
+    time = datetime.utcnow()
+    log_file_name = 'YouTubeData-{year}-{month}-{day}UTC{hour}-{minute}-{second}.log'.format(year=time.year,
+                                                                                 month=time.month,
+                                                                                 day=time.day,
+                                                                                 hour=time.hour,
+                                                                                 minute=time.minute,
+                                                                                 second=time.second)
+
+    logging.basicConfig(level=logging.INFO, filename=log_file_name, filemode='w',
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
     extractor_channels = ChannelDataExtractor()
     extractor_videos = VideoDataExtractor()
 
