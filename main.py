@@ -18,6 +18,8 @@ def main():
     file_writer.writing(extractor_videos.extract_data(ChannelsID), 'dataVideos.json')
     storage.load_file_to_s3(file_writer.get_path())
 
+    storage.download_folder('YouTube')
+
 
 
 
