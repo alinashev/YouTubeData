@@ -23,8 +23,10 @@ class StorageS3:
                 continue
             bucket.download_file(obj.key, self.__path)
 
-    def get_path(self):
-        return self.__path
+    @staticmethod
+    def get_path_list(directory):
+        os.chdir(directory)
+        return [os.path.join(root, name) for root, dirs, files in os.walk(".", topdown=False) for name in files]
 
     def load_file_to_s3(self, file_name):
         self.__s3.meta.client.upload_file(file_name, self.__bucket_name,
