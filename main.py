@@ -1,9 +1,10 @@
 from ChannelsID import ChannelsID
-from ChannelDataExtractor import ChannelDataExtractor
+from Commons.FileWriter import FileWriter
 from Commons.ReaderJSON import ReaderJSON
 from Commons.StorageS3 import StorageS3
-from Commons.FileWriter import FileWriter
-from VideoDataExtractor import VideoDataExtractor
+from Extract.ChannelDataExtractor import ChannelDataExtractor
+from Extract.VideoDataExtractor import VideoDataExtractor
+from Transform.VideoParser import VideoParser
 
 
 def main():
@@ -26,8 +27,8 @@ def main():
     reader_channel = ReaderJSON(path[0])
     reader_video = ReaderJSON(path[1])
 
-    array_json_channels = reader_channel.get_json()
-    array_json_video = reader_video.get_json()
+    json_channels = reader_channel.get_json()
+    json_video = reader_video.get_json()
 
 
 if __name__ == '__main__':

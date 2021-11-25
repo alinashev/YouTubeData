@@ -1,20 +1,20 @@
 import settings
 from googleapiclient.discovery import build
-from DataExtractor import DataExtractor
+from Extract.DataExtractor import DataExtractor
 
 
-class ChannelDataExtractor(DataExtractor):
-
+class VideoDataExtractor(DataExtractor):
     __youtube = build('youtube', 'v3', developerKey=settings.you_tube_API_key)
 
     def extract_data(self, ChannelsID):
         list_req = list()
         for channelID in ChannelsID:
-            request = self.__youtube.channels().list(
-                part="statistics",
-                id=channelID.value
+            request = self.__youtube.search().list(
+                part="snippet",
+                channelId=channelID.value,
+                maxResults="5",
+                order="date"
             )
             response = request.execute()
             list_req.append(response)
         return dict(zip(list(map(lambda c: c.name, ChannelsID)), list_req))
-
