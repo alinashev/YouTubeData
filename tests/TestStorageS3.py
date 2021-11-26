@@ -7,12 +7,11 @@ class TestStorageS3(unittest.TestCase):
     directory: str = "YouTube"
     storage: StorageS3
 
-    def setup(self) -> None:
+    def setUp(self) -> None:
         self.storage = StorageS3()
         self.storage.download_folder(self.directory)
 
-    def test_get_path_list(self):
-        self.setup()
+    def test_get_path_list(self) -> None:
         result_path_list: list = self.storage.get_path_list(self.directory)
 
         self.assertIsNot(result_path_list[0].find('dataChannels'), -1)

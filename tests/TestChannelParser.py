@@ -13,14 +13,12 @@ class TestChannelParser(unittest.TestCase):
     method_result: list
     channel_parser: ChannelParser
 
-    def setup(self):
+    def setUp(self) -> None:
         self.json_channels = ReaderJSON('YouTube/Lake/jsonTypesFile/YouTube/dataChannels.json').get_json()
         self.channel_id = ChannelsID('channels.txt').get_channels_id()
         self.channel_parser = ChannelParser()
 
-    def test_parse_to_obj(self):
-        self.setup()
-
+    def test_parse_to_obj(self) -> None:
         self.method_result = self.channel_parser.parse_to_obj(self.json_channels, self.channel_id)
         list_of_type_result = list(map(type, self.method_result))
 

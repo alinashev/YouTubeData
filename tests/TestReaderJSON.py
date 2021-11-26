@@ -13,24 +13,23 @@ class TestReaderJSON(unittest.TestCase):
     json_channels: dict
     json_video: dict
 
-    def setup(self):
-        self.storage = StorageS3()
-        self.storage.download_folder(self.directory)
-        self.path = self.storage.get_path_list(self.directory)
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.storage = StorageS3()
+        cls.storage.download_folder(cls.directory)
+        cls.path = cls.storage.get_path_list(cls.directory)
 
-        self.json_channels = ReaderJSON(self.path[0]).get_json()
-        self.json_video = ReaderJSON(self.path[1]).get_json()
+        cls.json_channels = ReaderJSON(cls.path[0]).get_json()
+        cls.json_video = ReaderJSON(cls.path[1]).get_json()
 
-    def test_open_json_file(self):
-        self.setup()
-
+    def test_open_json_file(self) -> None:
         for p in self.path:
             result: Any = ReaderJSON(p).open_json_file()
             self.assertEqual(type(result), dict)
             self.assertIsNot(len(result), 0)
             self.assertIsNot(result.keys(), 10)
 
-    def test_get_json(self):
+    def test_get_json(self) -> None:
         self.assertEqual(type(self.json_channels), dict)
         self.assertEqual(type(self.json_video), dict)
 

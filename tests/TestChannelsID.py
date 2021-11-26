@@ -6,7 +6,7 @@ from ChannelsID import ChannelsID
 
 class TestChannelsID(unittest.TestCase):
 
-    def test_get_channels_id(self):
+    def test_get_channels_id(self) -> None:
         channel_id: enum.Enum = ChannelsID('channels.txt').get_channels_id()
         values: list = [v.value for v in channel_id]
         name: list = [n.name for n in channel_id]
