@@ -3,6 +3,6 @@ from abc import ABC, abstractmethod
 
 class Parser(ABC):
     @abstractmethod
-    def parse_to_obj(self, json_string):
+    def parse_to_obj(self, json_string, ChannelsID):
         pass
 

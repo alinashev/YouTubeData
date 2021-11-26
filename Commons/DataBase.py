@@ -25,7 +25,6 @@ class DataBase:
                                                     port=cls.__port)
             except (Exception, Error) as error:
                 logging.error(error)
-                exit()
 
         else:
             logging.info('Connection established')
@@ -33,6 +32,9 @@ class DataBase:
 
     @classmethod
     def close(cls):
-        if cls.__connection:
-            logging.info('Close connection')
-            cls.__connection.close()
+        try:
+            if cls.__connection:
+                logging.info('Close connection')
+                cls.__connection.close()
+        except (Exception, Error) as error:
+            logging.error(error)

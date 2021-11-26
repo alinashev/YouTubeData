@@ -1,10 +1,9 @@
-from ChannelsID import ChannelsID
 from Entities.Channel import Channel
 from Transform.Parser import Parser
 
 
 class ChannelParser(Parser):
-    def parse_to_obj(self, json_string):
+    def parse_to_obj(self, json_string, ChannelsID):
         return [Channel(channelID.name,
                         channelID.value,
                         json_string[channelID.name]["items"][0]["statistics"]["viewCount"],

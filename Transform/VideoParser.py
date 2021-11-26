@@ -1,10 +1,9 @@
-from ChannelsID import ChannelsID
 from Entities.Video import Video
 from Transform.Parser import Parser
 
 
 class VideoParser(Parser):
-    def parse_to_obj(self, json_string):
+    def parse_to_obj(self, json_string, ChannelsID):
         return [Video(channelID.name,
                       channelID.value,
                       None,
