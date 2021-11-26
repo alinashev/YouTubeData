@@ -49,8 +49,8 @@ def main():
     reader_channel: ReaderJSON = ReaderJSON(path[0])
     reader_video: ReaderJSON = ReaderJSON(path[1])
 
-    json_channels: str = reader_channel.get_json()
-    json_video: str = reader_video.get_json()
+    json_channels: dict = reader_channel.get_json()
+    json_video: dict = reader_video.get_json()
 
     ChannelLoader().loading_to_DWH(ChannelParser().parse_to_obj(json_channels, channel_id))
     VideoLoader().loading_to_DWH(VideoParser().parse_to_obj(json_video, channel_id))
