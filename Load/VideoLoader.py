@@ -1,17 +1,17 @@
 import logging
+from typing import Any
 
 from Commons.DataBase import DataBase
 from Load.Loader import Loader
 
 
 class VideoLoader(Loader):
-    def loading_to_DWH(self, list_for_load):
+    def loading_to_DWH(self, list_for_load: list) -> None:
         try:
-            connect = DataBase.connect()
-            cursor = connect.cursor()
+            connect: Any = DataBase.connect()
+            cursor: Any = connect.cursor()
 
-            for i in list_for_load:
-                obj = i
+            for obj in list_for_load:
                 insert_query = """INSERT INTO videodata (channel_name, channel_id, video_id, published_at, title, 
                 description) VALUES ('{channel_name}', '{channel_id}', '{video_id}', '{published_at}', '{title}', 
                 '{description}') """.format(

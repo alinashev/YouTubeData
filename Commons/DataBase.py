@@ -1,20 +1,22 @@
 import logging
+from typing import Any
+
 import psycopg2
 from psycopg2 import Error
 import settings
 
 
 class DataBase:
-    __connection = None
+    __connection: None = None
 
-    __user = settings.rds_user
-    __password = settings.rds_password
-    __database = settings.rds_database
-    __host = settings.rds_host
-    __port = settings.rds_port
+    __user: str = settings.rds_user
+    __password: str = settings.rds_password
+    __database: str = settings.rds_database
+    __host: str = settings.rds_host
+    __port: str = settings.rds_port
 
     @classmethod
-    def connect(cls):
+    def connect(cls) -> Any:
         if not cls.__connection:
             logging.info('Establishing connection...')
             try:
@@ -31,7 +33,7 @@ class DataBase:
         return cls.__connection
 
     @classmethod
-    def close(cls):
+    def close(cls) -> None:
         try:
             if cls.__connection:
                 logging.info('Close connection')

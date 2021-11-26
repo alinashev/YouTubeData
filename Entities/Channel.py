@@ -1,6 +1,12 @@
 class Channel:
+    channel_name: str
+    channel_id: str
+    view_count: str
+    subscriber_count: str
+    video_count: str
 
-    def __init__(self, channel_name, channel_id, view_count, subscriber_count, video_count):
+    def __init__(self, channel_name: str, channel_id: str, view_count: str, subscriber_count: str,
+                 video_count: str) -> None:
         self.channel_name = channel_name
         self.channel_id = channel_id
         self.view_count = view_count
