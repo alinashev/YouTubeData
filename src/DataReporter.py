@@ -29,6 +29,12 @@ class DataReporter(Action):
         file_writer.writing(video_category_extractor.extract(video_list_db), file_name)
         storage.load_file_to_s3(file_writer.get_path())
 
+        reader: ReaderJSON = ReaderJSON(file_name)
+        json_category: dict = reader.get_json()
+
+        category_parser: CategoryParser = CategoryParser().parse_to_obj(json_category, video_list_db)
+
+        VideoCategoryLoader().loading_to_DWH(category_parser)
 
 
 
