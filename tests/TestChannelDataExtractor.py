@@ -1,7 +1,7 @@
 import unittest
 from enum import Enum
 
-from ChannelsID import ChannelsID
+from Commons.ChannelsID import ChannelsID
 from Extract.ChannelDataExtractor import ChannelDataExtractor
 
 

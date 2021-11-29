@@ -2,7 +2,7 @@ import logging
 from datetime import datetime
 from enum import Enum
 
-from ChannelsID import ChannelsID
+from Commons.ChannelsID import ChannelsID
 from Commons.DataBase import DataBase
 from Commons.FileWriter import FileWriter
 from Commons.ReaderJSON import ReaderJSON

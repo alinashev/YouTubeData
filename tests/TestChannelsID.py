@@ -1,7 +1,7 @@
 import enum
 import unittest
 
-from ChannelsID import ChannelsID
+from Commons.ChannelsID import ChannelsID
 
 
 class TestChannelsID(unittest.TestCase):

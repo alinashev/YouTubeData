@@ -1,7 +1,7 @@
 import unittest
 from enum import Enum
 
-from ChannelsID import ChannelsID
+from Commons.ChannelsID import ChannelsID
 from Commons.ReaderJSON import ReaderJSON
 from Entities.Video import Video
 from Transform.VideoParser import VideoParser
