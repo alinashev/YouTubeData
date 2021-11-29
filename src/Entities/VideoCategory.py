@@ -18,3 +18,15 @@ class VideoCategory:
                                                     video_category_id=self.video_category_id,
                                                     channel_name=self.channel_name,
                                                     channel_id=self.channel_id)
+
+    def get_video_id(self) -> str:
+        return self.video_id
+
+    def get_video_category_id(self) -> str:
+        return self.video_category_id
+
+    def get_channel_name(self) -> str:
+        return self.channel_name
+
+    def get_channel_id(self) -> str:
+        return self.channel_id

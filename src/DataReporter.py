@@ -1,17 +1,15 @@
-import settings
+from enum import Enum
 
-from typing import Any
-from googleapiclient.discovery import build
 from Action.Action import Action
-from Commons.DataBase import DataBase
+from Analysis.Analyzer import Analyzer
+from Commons.ChannelsID import ChannelsID
 from Commons.FileWriter import FileWriter
 from Commons.ReaderJSON import ReaderJSON
 from Commons.StorageS3 import StorageS3
-from Entities.Video import Video
 from Extract.VideoCategoryExtractor import VideoCategoryExtractor
 from Extract.VideoExtractorFromDB import VideoExtractorFromDB
 from Load.VideoCategoryLoader import VideoCategoryLoader
-from Load.VideoLoader import VideoLoader
+from Report.Reporter import Reporter
 from Transform.CategoryParser import CategoryParser
 
 
@@ -32,13 +30,12 @@ class DataReporter(Action):
         reader: ReaderJSON = ReaderJSON(file_name)
         json_category: dict = reader.get_json()
 
-        category_parser: CategoryParser = CategoryParser().parse_to_obj(json_category, video_list_db)
+        category_list: list = CategoryParser().parse_to_obj(json_category, video_list_db)
 
-        VideoCategoryLoader().loading_to_DWH(category_parser)
+        VideoCategoryLoader().loading_to_DWH(category_list)
 
+        channel_id: Enum = ChannelsID('channels.txt').get_channels_id()
 
-
-
-
-
-
+        report_file_name = "report.json"
+        analyzer: Analyzer = Analyzer()
+        file_writer.writing(analyzer.get_category(channel_id, category_list), report_file_name)
