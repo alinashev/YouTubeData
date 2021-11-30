@@ -16,7 +16,7 @@ class VideoDataExtractor(DataExtractor):
                 part="snippet",
                 channelId=channelID.value,
                 maxResults="5",
-                order="date"
+                order="rating"
             )
             response: Any = request.execute()
             list_req.append(response)

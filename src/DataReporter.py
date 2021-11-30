@@ -34,7 +34,7 @@ class DataReporter(Action):
 
         VideoCategoryLoader().loading_to_DWH(category_list)
 
-        channel_id: Enum = ChannelsID('channels.txt').get_channels_id()
+        channel_id: Enum = ChannelsID('channels2.txt').get_channels_id()
 
         report_file_name = "report.json"
         analyzer: Analyzer = Analyzer()

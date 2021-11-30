@@ -29,7 +29,7 @@ class DataPuller(Action):
         logging.basicConfig(level=logging.INFO, filename=log_file_name, filemode='w',
                             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-        channel_id: Enum = ChannelsID('channels.txt').get_channels_id()
+        channel_id: Enum = ChannelsID('channels2.txt').get_channels_id()
 
         extractor_channels: ChannelDataExtractor = ChannelDataExtractor()
         extractor_videos: VideoDataExtractor = VideoDataExtractor()
