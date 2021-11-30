@@ -2,10 +2,9 @@ from typing import Any
 
 from Commons.DataBase import DataBase
 from Entities.Video import Video
-from Extract.DataExtractor import DataExtractor
 
 
-class VideoExtractorFromDB():
+class VideoExtractorFromDB:
     video_obj_list: list
 
     def extract_from_bd(self) -> Any:

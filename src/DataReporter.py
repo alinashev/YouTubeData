@@ -39,3 +39,5 @@ class DataReporter(Action):
         report_file_name = "report.json"
         analyzer: Analyzer = Analyzer()
         file_writer.writing(analyzer.get_category(channel_id, category_list), report_file_name)
+
+        Reporter.seng_report_to_email(report_file_name, "alinashvcenko5@gmail.com")
