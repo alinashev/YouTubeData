@@ -19,7 +19,7 @@ class TestChannelParser(unittest.TestCase):
         self.channel_parser = ChannelParser()
 
     def test_parse_to_obj(self) -> None:
-        self.method_result = self.channel_parser.parse_to_obj(self.json_channels, self.channel_id)
+        self.method_result = self.channel_parser.parse(self.json_channels, self.channel_id)
         list_of_type_result = list(map(type, self.method_result))
 
         self.assertIsNot(len(self.method_result), 0)

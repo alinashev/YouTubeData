@@ -5,7 +5,7 @@ from Transform.Parser import Parser
 
 
 class VideoParser(Parser):
-    def parse_to_obj(self, json_string: Any, ChannelsID: Any) -> list[Video]:
+    def parse(self, json_string: Any, ChannelsID: Any) -> list[Video]:
         obj_list = list()
         for channelID in ChannelsID:
             for i in range(0, 5):

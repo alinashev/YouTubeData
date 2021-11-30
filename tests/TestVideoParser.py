@@ -19,7 +19,7 @@ class TestVideoParser(unittest.TestCase):
         self.video_parser = VideoParser()
 
     def test_parse_to_obj(self) -> None:
-        self.method_result = VideoParser().parse_to_obj(self.json_video, self.channel_id)
+        self.method_result = VideoParser().parse(self.json_video, self.channel_id)
         list_of_type_result = list(map(type, self.method_result))
 
         self.assertIsNot(len(self.method_result), 0)
