@@ -13,8 +13,10 @@ class TestVideoDataExtractor(unittest.TestCase):
         self.channel_id = ChannelsID('channels.txt').get_channels_id()
         self.extract_data = VideoDataExtractor().extract(self.channel_id)
 
-    def test_extract(self) -> None:
+    def test_empty(self) -> None:
         self.assertIsNot(len(self.extract_data), 0)
+
+    def test_return_type(self) -> None:
         self.assertEqual(type(self.extract_data), dict)
 
     if __name__ == '__main__':

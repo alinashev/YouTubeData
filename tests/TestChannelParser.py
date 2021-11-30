@@ -10,21 +10,25 @@ from Transform.ChannelParser import ChannelParser
 class TestChannelParser(unittest.TestCase):
     json_channels: dict
     channel_id: Enum
-    method_result: list
     channel_parser: ChannelParser
+    method_result: list
+    list_of_type_result: list
 
     def setUp(self) -> None:
         self.json_channels = ReaderJSON('YouTube/Lake/jsonTypesFile/YouTube/dataChannels.json').get_json()
         self.channel_id = ChannelsID('channels.txt').get_channels_id()
         self.channel_parser = ChannelParser()
-
-    def test_parse_to_obj(self) -> None:
         self.method_result = self.channel_parser.parse(self.json_channels, self.channel_id)
-        list_of_type_result = list(map(type, self.method_result))
+        self.list_of_type_result = list(map(type, self.method_result))
 
+    def test_non_empty_returned_result(self) -> None:
         self.assertIsNot(len(self.method_result), 0)
-        self.assertIs(len(set(list_of_type_result)), 1)
-        self.assertEqual(set(list_of_type_result).pop(), Channel)
+
+    def test_keys_uniqueness_check(self) -> None:
+        self.assertIs(len(set(self.list_of_type_result)), 1)
+
+    def test_check_type_object(self) -> None:
+        self.assertEqual(set(self.list_of_type_result).pop(), Channel)
 
     if __name__ == '__main__':
         unittest.main()
