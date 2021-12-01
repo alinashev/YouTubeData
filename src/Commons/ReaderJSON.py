@@ -4,12 +4,12 @@ from typing import Any
 
 class ReaderJSON:
     path: str
-    text: str
+    text: dict
 
     def __init__(self, path: str) -> None:
         self.path = path
 
-    def open(self) -> Any:
+    def open(self) -> dict:
         with open(self.path, 'r', encoding='utf-8') as f:
             self.text = json.load(f)
         return self.text

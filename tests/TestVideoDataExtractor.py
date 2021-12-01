@@ -10,7 +10,9 @@ class TestVideoDataExtractor(unittest.TestCase):
     extract_data: dict
 
     def setUp(self) -> None:
-        self.channel_id = ChannelsID('channels.txt').get_channels_id()
+        self.channel_id = Enum('ChannelsID',
+                               {line.split()[0]: line.split()[1] for line in open('resources/channels.txt')})
+
         self.extract_data = VideoDataExtractor().extract(self.channel_id)
 
     def test_empty(self) -> None:

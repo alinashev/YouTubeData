@@ -8,8 +8,7 @@ class TestChannelsID(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-
-        cls.channel_id: enum.Enum = ChannelsID('channels.txt')
+        cls.channel_id: enum.Enum = ChannelsID('resources/channels.txt')
         cls.channel = cls.channel_id.get_channels_id()
         cls.values: list = [v.value for v in cls.channel_id]
         cls.name: list = [n.name for n in cls.channel_id]

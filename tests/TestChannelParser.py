@@ -1,3 +1,4 @@
+import json
 import unittest
 from enum import Enum
 
@@ -15,8 +16,12 @@ class TestChannelParser(unittest.TestCase):
     list_of_type_result: list
 
     def setUp(self) -> None:
-        self.json_channels = ReaderJSON('YouTube/Lake/jsonTypesFile/YouTube/dataChannels.json').get_json()
-        self.channel_id = ChannelsID('channels.txt').get_channels_id()
+        with open('resources/dataChannels.json', 'r', encoding='utf-8') as f:
+            self.json_channels = json.load(f)
+
+        self.channel_id = Enum('ChannelsID',
+                               {line.split()[0]: line.split()[1] for line in open('resources/channels.txt')})
+
         self.channel_parser = ChannelParser()
         self.method_result = self.channel_parser.parse(self.json_channels, self.channel_id)
         self.list_of_type_result = list(map(type, self.method_result))
