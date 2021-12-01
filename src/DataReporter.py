@@ -25,7 +25,6 @@ class DataReporter(Action):
         video_category_extractor: VideoCategoryExtractor = VideoCategoryExtractor()
 
         file_name: str = 'videoCategory.json'
-
         file_writer.writing(video_category_extractor.extract(video_list_db), file_name)
         storage.upload(file_writer.get_path())
 
