@@ -42,7 +42,7 @@ class StorageS3:
                 path_list.append(os.path.join(root, name))
         return path_list
 
-    def load_file_to_s3(self, file_name: str) -> None:
+    def upload(self, file_name: str) -> None:
         self.__s3.meta.client.upload_file(file_name, self.__bucket_name,
                                           'Resources/Lake/jsonTypesFile/YouTube/{name}'.format(name=file_name))
         logging.info("Pulled data has been loaded into S3")

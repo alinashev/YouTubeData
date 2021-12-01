@@ -37,10 +37,10 @@ def main():
     storage: StorageS3 = StorageS3()
 
     file_writer.writing(extractor_channels.extract(channel_id), 'dataChannels.json')
-    storage.load_file_to_s3(file_writer.get_path())
+    storage.upload(file_writer.get_path())
 
     file_writer.writing(extractor_videos.extract(channel_id), 'dataVideos.json')
-    storage.load_file_to_s3(file_writer.get_path())
+    storage.upload(file_writer.get_path())
 
     storage.download_folder("YouTube")
 

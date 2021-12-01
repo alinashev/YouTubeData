@@ -20,8 +20,8 @@ class TestReaderJSON(unittest.TestCase):
         self.reader_channels = ReaderJSON('YouTube/Lake/jsonTypesFile/YouTube/dataVideos.json')
         self.reader_video = ReaderJSON('YouTube/Lake/jsonTypesFile/YouTube/dataVideos.json')
 
-        self.open_channels = self.reader_channels.open_json_file()
-        self.open_video = self.reader_video.open_json_file()
+        self.open_channels = self.reader_channels.open()
+        self.open_video = self.reader_video.open()
 
         self.json_channels = self.reader_channels.get_json()
         self.json_video = self.reader_video.get_json()
