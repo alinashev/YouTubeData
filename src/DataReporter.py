@@ -25,14 +25,14 @@ class DataReporter(Action):
         file_name: str = 'videoCategory.json'
 
         file_writer.writing(video_category_extractor.extract(video_list_db), file_name)
-        storage.load_file_to_s3(file_writer.get_path())
+        storage.upload(file_writer.get_path())
 
         reader: ReaderJSON = ReaderJSON(file_name)
         json_category: dict = reader.get_json()
 
-        category_list: list = CategoryParser().parse_to_obj(json_category, video_list_db)
+        category_list: list = CategoryParser().parse(json_category, video_list_db)
 
-        VideoCategoryLoader().loading_to_DWH(category_list)
+        VideoCategoryLoader().load(category_list)
 
         channel_id: Enum = ChannelsID('channels2.txt').get_channels_id()
 
@@ -40,4 +40,4 @@ class DataReporter(Action):
         analyzer: Analyzer = Analyzer()
         file_writer.writing(analyzer.get_category(channel_id, category_list), report_file_name)
 
-        Reporter.seng_report_to_email(report_file_name, "alinashvcenko5@gmail.com")
+        report = Reporter('report.json', "alinashvcenko5@gmail.com")

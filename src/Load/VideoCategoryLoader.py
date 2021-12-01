@@ -6,7 +6,7 @@ from Load.Loader import Loader
 
 
 class VideoCategoryLoader(Loader):
-    def loading_to_DWH(self, list_for_load: list) -> None:
+    def load(self, list_for_load: list) -> None:
         try:
             connect: Any = DataBase.connect()
             cursor: Any = connect.cursor()

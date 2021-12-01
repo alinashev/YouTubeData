@@ -8,7 +8,7 @@ from Transform.Parser import Parser
 
 class CategoryParser(Parser):
 
-    def parse_to_obj(self, json_string: Any, video_obj_list: list) -> list:
+    def parse(self, json_string: Any, video_obj_list: list) -> list:
         obj_list: list = list()
         for obj in video_obj_list:
             try:

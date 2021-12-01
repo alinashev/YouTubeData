@@ -5,6 +5,6 @@ from typing import Any
 
 class Parser(ABC):
     @abstractmethod
-    def parse_to_obj(self, json_string: Any, ChannelsID: Enum) -> list:
+    def parse(self, json_string: Any, ChannelsID: Enum) -> list:
         pass
 
