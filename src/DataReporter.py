@@ -1,5 +1,6 @@
 from enum import Enum
 
+import settings
 from Action.Action import Action
 from Analysis.Analyzer import Analyzer
 from Commons.ChannelsID import ChannelsID
@@ -9,6 +10,7 @@ from Commons.StorageS3 import StorageS3
 from Extract.VideoCategoryExtractor import VideoCategoryExtractor
 from Extract.VideoExtractorFromDB import VideoExtractorFromDB
 from Load.VideoCategoryLoader import VideoCategoryLoader
+from Report.Repeater import Repeater
 from Report.Reporter import Reporter
 from Transform.CategoryParser import CategoryParser
 
@@ -34,10 +36,12 @@ class DataReporter(Action):
 
         VideoCategoryLoader().load(category_list)
 
-        channel_id: Enum = ChannelsID('channels2.txt').get_channels_id()
+        channel_id: Enum = ChannelsID('channels.txt').get_channels_id()
 
         report_file_name = "report.json"
         analyzer: Analyzer = Analyzer()
         file_writer.writing(analyzer.get_category(channel_id, category_list), report_file_name)
 
-        report = Reporter('report.json', "alinashvcenko5@gmail.com")
+        repeater = Repeater()
+        report = Reporter(report_file_name, settings.email_recipient)
+        repeater.repeat(3600, lambda *args, **kwargs: report.send())
