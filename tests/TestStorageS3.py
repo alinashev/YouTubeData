@@ -6,7 +6,6 @@ from Commons.StorageS3 import StorageS3
 
 class TestStorageS3(unittest.TestCase):
     directory: str = "YouTube"
-    storage: StorageS3
 
     def setUp(self) -> None:
         self.storage = StorageS3('task-bucket-a')

@@ -9,7 +9,7 @@ class TestChannelsID(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.channel_id: ChannelsID = ChannelsID('resources/channels.txt')
         cls.channel: dict = cls.channel_id.get_channels_id()
-        cls.values: list = [ cls.channel[v] for v in cls.channel]
+        cls.values: list = [cls.channel[v] for v in cls.channel]
         cls.name: list = [n for n in cls.channel]
 
     def test_correct_return_value(self):

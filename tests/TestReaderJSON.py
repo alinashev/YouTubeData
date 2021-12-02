@@ -4,17 +4,6 @@ from Commons.ReaderJSON import ReaderJSON
 
 
 class TestReaderJSON(unittest.TestCase):
-    path: list
-    json: dict
-
-    reader_channels: ReaderJSON
-    reader_video: ReaderJSON
-
-    open_channels: dict
-    open_video: dict
-
-    json_channels: dict
-    json_video: dict
 
     def setUp(self) -> None:
         self.reader_channels = ReaderJSON('resources/dataVideos.json')

@@ -6,12 +6,6 @@ from Transform.ChannelParser import ChannelParser
 
 
 class TestChannelParser(unittest.TestCase):
-    json_channels: dict
-    channel_id: dict
-    channel_parser: ChannelParser
-    method_result: list
-    list_of_type_result: list
-
     def setUp(self) -> None:
         with open('resources/dataChannels.json', 'r', encoding='utf-8') as f:
             self.json_channels = json.load(f)
