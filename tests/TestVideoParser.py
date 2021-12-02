@@ -1,16 +1,13 @@
 import json
 import unittest
-from enum import Enum
 
-from Commons.ChannelsID import ChannelsID
-from Commons.ReaderJSON import ReaderJSON
 from Entities.Video import Video
 from Transform.VideoParser import VideoParser
 
 
 class TestVideoParser(unittest.TestCase):
 
-    channel_id: Enum
+    channel_id: dict
     video_parser: VideoParser
     method_result: list
     list_of_type_result: list
@@ -19,8 +16,7 @@ class TestVideoParser(unittest.TestCase):
         with open('resources/dataVideos.json', 'r', encoding='utf-8') as f:
             self.json_video = json.load(f)
 
-        self.channel_id = Enum('ChannelsID',
-                               {line.split()[0]: line.split()[1] for line in open('resources/channels.txt')})
+        self.channel_id = {line.split()[0]: line.split()[1] for line in open('resources/channels.txt')}
 
         self.video_parser = VideoParser()
         self.method_result = VideoParser().parse(self.json_video, self.channel_id)

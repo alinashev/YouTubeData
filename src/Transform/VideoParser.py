@@ -10,15 +10,15 @@ class VideoParser(Parser):
         for channelID in ChannelsID:
             for i in range(0, 5):
                 try:
-                    res: str = (json_string[channelID.name]['items'][i]['id']['videoId'])
+                    res: str = (json_string[channelID]['items'][i]['id']['videoId'])
                 except:
                     res = str(None)
 
-                obj_list.append(Video(channelID.name,
-                                      channelID.value,
+                obj_list.append(Video(channelID,
+                                      ChannelsID[channelID],
                                       res,
-                                      json_string[channelID.name]['items'][i]['snippet']['publishedAt'],
-                                      json_string[channelID.name]['items'][i]['snippet']['title'],
+                                      json_string[channelID]['items'][i]['snippet']['publishedAt'],
+                                      json_string[channelID]['items'][i]['snippet']['title'],
                                       str(None)
                                       )
                                 )

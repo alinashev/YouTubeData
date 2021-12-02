@@ -9,18 +9,16 @@ class TestReaderJSON(unittest.TestCase):
 
     reader_channels: ReaderJSON
     reader_video: ReaderJSON
-    reader_missing: ReaderJSON
 
     open_channels: dict
     open_video: dict
-    open_missing: dict
 
     json_channels: dict
     json_video: dict
 
     def setUp(self) -> None:
-        self.reader_channels = ReaderJSON('YouTube/Lake/jsonTypesFile/YouTube/dataVideos.json')
-        self.reader_video = ReaderJSON('YouTube/Lake/jsonTypesFile/YouTube/dataVideos.json')
+        self.reader_channels = ReaderJSON('resources/dataVideos.json')
+        self.reader_video = ReaderJSON('resources/dataVideos.json')
 
         self.open_channels = self.reader_channels.open()
         self.open_video = self.reader_video.open()

@@ -1,16 +1,13 @@
 import json
 import unittest
-from enum import Enum
 
-from Commons.ChannelsID import ChannelsID
-from Commons.ReaderJSON import ReaderJSON
 from Entities.Channel import Channel
 from Transform.ChannelParser import ChannelParser
 
 
 class TestChannelParser(unittest.TestCase):
     json_channels: dict
-    channel_id: Enum
+    channel_id: dict
     channel_parser: ChannelParser
     method_result: list
     list_of_type_result: list
@@ -19,8 +16,7 @@ class TestChannelParser(unittest.TestCase):
         with open('resources/dataChannels.json', 'r', encoding='utf-8') as f:
             self.json_channels = json.load(f)
 
-        self.channel_id = Enum('ChannelsID',
-                               {line.split()[0]: line.split()[1] for line in open('resources/channels.txt')})
+        self.channel_id = {line.split()[0]: line.split()[1] for line in open('resources/channels.txt')}
 
         self.channel_parser = ChannelParser()
         self.method_result = self.channel_parser.parse(self.json_channels, self.channel_id)

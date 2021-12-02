@@ -1,4 +1,3 @@
-import enum
 import unittest
 
 from Commons.ChannelsID import ChannelsID
@@ -8,13 +7,13 @@ class TestChannelsID(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        cls.channel_id: enum.Enum = ChannelsID('resources/channels.txt')
-        cls.channel = cls.channel_id.get_channels_id()
-        cls.values: list = [v.value for v in cls.channel_id]
-        cls.name: list = [n.name for n in cls.channel_id]
+        cls.channel_id: ChannelsID = ChannelsID('resources/channels.txt')
+        cls.channel: dict = cls.channel_id.get_channels_id()
+        cls.values: list = [ cls.channel[v] for v in cls.channel]
+        cls.name: list = [n for n in cls.channel]
 
     def test_correct_return_value(self):
-        self.assertEqual(type(self.channel), enum.EnumMeta)
+        self.assertEqual(type(self.channel), dict)
 
     def test_non_empty_value(self):
         self.assertIsNot(len(self.values), 0)
