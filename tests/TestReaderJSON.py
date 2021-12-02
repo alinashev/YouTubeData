@@ -9,9 +9,11 @@ class TestReaderJSON(unittest.TestCase):
 
     reader_channels: ReaderJSON
     reader_video: ReaderJSON
+    reader_missing: ReaderJSON
 
-    open_channels: str
-    open_video: str
+    open_channels: dict
+    open_video: dict
+    open_missing: dict
 
     json_channels: dict
     json_video: dict
@@ -25,6 +27,12 @@ class TestReaderJSON(unittest.TestCase):
 
         self.json_channels = self.reader_channels.get_json()
         self.json_video = self.reader_video.get_json()
+
+    def test_exception_missing_file(self) -> None:
+        self.assertRaises(FileNotFoundError, lambda: ReaderJSON('missing.json'))
+
+    def test_exception_invalid_json(self) -> None:
+        self.assertRaises(ValueError, lambda: ReaderJSON('resources/invalid.json').open())
 
     def test_return_type_open_dataChannels(self) -> None:
         self.assertEqual(type(self.open_channels), dict)
