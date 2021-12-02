@@ -33,7 +33,7 @@ def main():
     extractor_videos: VideoDataExtractor = VideoDataExtractor()
 
     file_writer: FileWriter = FileWriter()
-    storage: StorageS3 = StorageS3()
+    storage: StorageS3 = StorageS3('task-bucket-a')
 
     file_writer.writing(extractor_channels.extract(channel_id), 'dataChannels.json')
     storage.upload(file_writer.get_path())

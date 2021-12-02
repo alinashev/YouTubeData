@@ -8,11 +8,14 @@ import settings
 
 class StorageS3:
     __path: str
-    __bucket_name: str = 'task-bucket-a'
+    __bucket_name: str
     __s3: Any = boto3.resource('s3',
                                aws_access_key_id=settings.aws_access_key_id,
                                aws_secret_access_key=settings.aws_secret_access_key)
     __downloaded_directory: str
+
+    def __init__(self, bucket_name):
+        self.__bucket_name = bucket_name
 
     def download_folder(self, destination_directory: str) -> None:
         self.__downloaded_directory = destination_directory
