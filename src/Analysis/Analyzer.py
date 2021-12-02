@@ -1,10 +1,7 @@
-from enum import Enum
-
-
 class Analyzer:
     def get_category(self, ChannelsID: dict, category_list: list) -> dict:
-        category_for_channel = list()
-        total_category = list()
+        category_for_channel: list = list()
+        total_category: list = list()
 
         for ch in ChannelsID:
             for category in category_list:

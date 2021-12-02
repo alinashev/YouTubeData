@@ -1,0 +1,17 @@
+ "shops":"[
+        {
+            "id":68,
+            "name":"ТЦ МЕГА Уфа",
+            "address":"Уфа, ул. Рубежная, д. 174, ТЦ МЕГА Уфа",
+            "modeWork":"Ежедневно с 10:00 до 22:00",
+            "url":"https://www.mvideo.ru/shops/S356",
+            "latitude":54.674,
+            "longitude":55.929,
+            "chainStore":{
+                "id":1,
+                "name":"М.Видео",
+                "type":"1",
+                "imagePath":null
+            }
+        },
+]

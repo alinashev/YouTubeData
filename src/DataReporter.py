@@ -35,7 +35,7 @@ class DataReporter(Action):
 
         channel_id: dict = ChannelsID('channels.txt').get_channels_id()
 
-        report_file_name = "report.json"
+        report_file_name: str = "report.json"
         analyzer: Analyzer = Analyzer()
         file_writer.writing(analyzer.get_category(channel_id, category_list), report_file_name)
 
