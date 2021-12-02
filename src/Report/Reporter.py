@@ -1,4 +1,3 @@
-import os
 import smtplib
 import ssl
 from datetime import datetime
@@ -16,11 +15,11 @@ class Reporter:
     file: Any
     recipient: str
 
-    def __init__(self, file, recipient):
+    def __init__(self, file, recipient) -> None:
         self.file = file
         self.recipient = recipient
 
-    def send(self):
+    def send(self) -> None:
         time: datetime = datetime.utcnow()
         subject: str = 'Report: {year}-{month}-{day}-{hour}-{minute}-{second}'.format(year=time.year,
                                                                                       month=time.month,

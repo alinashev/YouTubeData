@@ -10,19 +10,19 @@ class Repeater(object):
     kwargs: dict
     is_running: bool = False
 
-    def repeat(self, interval, function, *args, **kwargs):
+    def repeat(self, interval, function, *args, **kwargs) -> None:
         self.interval = interval
         self.function = function
         self.args = args
         self.kwargs = kwargs
         self.run()
 
-    def run(self):
+    def run(self) -> None:
         self.is_running = False
         self.start()
         self.function(*self.args, **self.kwargs)
 
-    def start(self):
+    def start(self) -> None:
         if not self.is_running:
             self.timer = Timer(self.interval, self.run)
             self.timer.start()

@@ -7,7 +7,7 @@ from Entities.Video import Video
 class VideoExtractorFromDB:
     video_obj_list: list
 
-    def extract_from_bd(self) -> Any:
+    def extract_from_bd(self) -> list:
         try:
             connect: Any = DataBase().connect()
             cursor: Any = connect.cursor()
