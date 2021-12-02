@@ -1,5 +1,3 @@
-from enum import Enum
-
 import settings
 from Action.Action import Action
 from Analysis.Analyzer import Analyzer
@@ -35,7 +33,7 @@ class DataReporter(Action):
 
         VideoCategoryLoader().load(category_list)
 
-        channel_id: Enum = ChannelsID('channels.txt').get_channels_id()
+        channel_id: dict = ChannelsID('channels.txt').get_channels_id()
 
         report_file_name = "report.json"
         analyzer: Analyzer = Analyzer()

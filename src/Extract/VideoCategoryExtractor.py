@@ -2,7 +2,6 @@ from typing import Any
 
 import settings
 from Extract.DataExtractor import DataExtractor
-from Extract.VideoExtractorFromDB import VideoExtractorFromDB
 from typing import Any
 from googleapiclient.discovery import build
 

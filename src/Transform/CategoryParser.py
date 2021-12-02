@@ -1,8 +1,6 @@
-from enum import Enum
 from typing import Any
 
 from Entities.VideoCategory import VideoCategory
-from Extract.VideoExtractorFromDB import VideoExtractorFromDB
 from Transform.Parser import Parser
 
 

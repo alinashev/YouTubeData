@@ -1,8 +1,7 @@
 import logging
-from datetime import datetime
-from enum import Enum
-
 import settings
+
+from datetime import datetime
 from Action.Action import Action
 from Commons.ChannelsID import ChannelsID
 from Commons.DataBase import DataBase
@@ -30,7 +29,7 @@ class DataPuller(Action):
         logging.basicConfig(level=logging.INFO, filename=log_file_name, filemode='w',
                             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-        channel_id: Enum = ChannelsID('channels.txt').get_channels_id()
+        channel_id: dict = ChannelsID('channels.txt').get_channels_id()
 
         extractor_channels: ChannelDataExtractor = ChannelDataExtractor()
         extractor_videos: VideoDataExtractor = VideoDataExtractor()
