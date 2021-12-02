@@ -1,5 +1,6 @@
-from typing import Any
+import logging
 
+from typing import Any
 from Commons.DataBase import DataBase
 from Load.Loader import Loader
 
@@ -20,5 +21,6 @@ class VideoCategoryLoader(Loader):
                 )
                 cursor.execute(insert_query)
                 connect.commit()
+            logging.info('Successfully inserted')
         except Exception as error:
-            print(error)
+            logging.error(error)

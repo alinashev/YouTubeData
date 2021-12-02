@@ -1,4 +1,4 @@
-from typing import Any
+import logging
 
 import settings
 from Extract.DataExtractor import DataExtractor
@@ -22,5 +22,5 @@ class VideoCategoryExtractor(DataExtractor):
 
             list_req.append(response)
             list_video_id.append(video_id.get_video_id())
-
+        logging.info('Data from youtube received')
         return dict(zip(list_video_id, list_req))

@@ -1,3 +1,4 @@
+import logging
 from typing import Any
 
 from Commons.DataBase import DataBase
@@ -17,9 +18,10 @@ class VideoExtractorFromDB:
             rows: Any = cursor.fetchall()
 
             self.video_obj_list = [Video(rows[1], rows[2], rows[3], rows[4], rows[5], rows[6]) for rows in rows]
+            logging.info('Successfully retrieved from database')
             return self.video_obj_list
         except Exception as error:
-            print(error)
+            logging.error(error)
 
     def get_video_obj_list(self) -> list:
         return self.video_obj_list

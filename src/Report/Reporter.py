@@ -1,3 +1,4 @@
+import logging
 import smtplib
 import ssl
 from datetime import datetime
@@ -49,8 +50,9 @@ class Reporter:
 
         message.attach(part)
         text = message.as_string()
-
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL("smtp.gmail.com", settings.smtp_port, context=context) as server:
             server.login(settings.email_sender, settings.email_pass)
             server.sendmail(settings.email_sender, self.recipient, text)
+
+        logging.info('Report sent successfully')

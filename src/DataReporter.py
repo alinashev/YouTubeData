@@ -1,7 +1,11 @@
+import logging
 import settings
+
+from datetime import datetime
 from Action.Action import Action
 from Analysis.Analyzer import Analyzer
 from Commons.ChannelsID import ChannelsID
+from Commons.DataBase import DataBase
 from Commons.FileWriter import FileWriter
 from Commons.ReaderJSON import ReaderJSON
 from Commons.StorageS3 import StorageS3
@@ -15,6 +19,17 @@ from Transform.CategoryParser import CategoryParser
 
 class DataReporter(Action):
     def execute(self) -> None:
+        time: datetime = datetime.utcnow()
+        log_file_name: str = settings.log_file_name.format(year=time.year,
+                                                           month=time.month,
+                                                           day=time.day,
+                                                           hour=time.hour,
+                                                           minute=time.minute,
+                                                           second=time.second)
+
+        logging.basicConfig(level=logging.INFO, filename=log_file_name, filemode='w',
+                            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
         video_from_db: VideoExtractorFromDB = VideoExtractorFromDB()
         video_list_db: list = video_from_db.extract_from_bd()
 
@@ -32,6 +47,7 @@ class DataReporter(Action):
         category_list: list = CategoryParser().parse(json_category, video_list_db)
 
         VideoCategoryLoader().load(category_list)
+        DataBase.close()
 
         channel_id: dict = ChannelsID('channels.txt').get_channels_id()
 
