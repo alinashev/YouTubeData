@@ -6,10 +6,10 @@ from Commons.StorageS3 import StorageS3
 
 class TestStorageS3(unittest.TestCase):
     directory: str = "YouTube"
-    storage: Any
+    storage: StorageS3
 
     def setUp(self) -> None:
-        self.storage = StorageS3()
+        self.storage = StorageS3('task-bucket-a')
         self.storage.download_folder(self.directory)
         self.result_path_list: list = self.storage.get_path_list()
 

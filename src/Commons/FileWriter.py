@@ -2,10 +2,12 @@ import json
 
 
 class FileWriter:
-    __path: str = None
+    __path: str
 
-    def writing(self, data: dict, path: str) -> None:
+    def __init__(self, path: str) -> None:
         self.__path = path
+
+    def writing(self, data: dict) -> None:
         with open(self.__path, 'w') as f:
             json.dump(data, f)
 
