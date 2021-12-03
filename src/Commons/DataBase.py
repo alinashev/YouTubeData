@@ -3,7 +3,7 @@ from typing import Any
 
 import psycopg2
 from psycopg2 import Error
-import settings
+from Settings.databaseSettings import *
 
 
 class DataBase:
@@ -14,11 +14,11 @@ class DataBase:
         if not self.__connection:
             logging.info('Establishing connection...')
             try:
-                self.__connection = psycopg2.connect(user=settings.rds_user,
-                                                     password=settings.rds_password,
-                                                     database=settings.rds_database,
-                                                     host=settings.rds_host,
-                                                     port=settings.rds_port)
+                self.__connection = psycopg2.connect(user=user,
+                                                     password=password,
+                                                     database=database,
+                                                     host=host,
+                                                     port=port)
             except (Exception, Error) as error:
                 logging.error(error)
 

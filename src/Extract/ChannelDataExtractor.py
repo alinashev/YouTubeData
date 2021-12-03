@@ -1,5 +1,5 @@
 import logging
-import settings
+from Settings import settings
 
 from typing import Any
 from googleapiclient.discovery import build

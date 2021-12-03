@@ -1,7 +1,7 @@
 import logging
 from typing import Any
 
-import settings
+from Settings import settings
 from googleapiclient.discovery import build
 from Extract.DataExtractor import DataExtractor
 

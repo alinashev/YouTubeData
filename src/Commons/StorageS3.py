@@ -3,7 +3,7 @@ import os
 from typing import Any
 
 import boto3
-import settings
+from Settings import settings
 
 
 class StorageS3:

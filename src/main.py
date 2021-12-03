@@ -1,7 +1,7 @@
 import logging
 from datetime import datetime
 
-import settings
+from Settings import settings
 from Commons.ChannelsID import ChannelsID
 from Commons.FileWriter import FileWriter
 from Commons.ReaderJSON import ReaderJSON
