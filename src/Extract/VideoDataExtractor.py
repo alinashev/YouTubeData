@@ -1,13 +1,15 @@
 import logging
 from typing import Any
 
-import settings
+from Settings import youTubeAPIsettings
 from googleapiclient.discovery import build
 from Extract.DataExtractor import DataExtractor
 
 
 class VideoDataExtractor(DataExtractor):
-    __youtube: Any = build('youtube', 'v3', developerKey=settings.you_tube_API_key)
+
+    def __init__(self, key=youTubeAPIsettings.key) -> None:
+        self.__youtube: Any = build('youtube', 'v3', developerKey=key)
 
     def extract(self, ChannelsID: dict) -> dict:
         list_req: list = list()

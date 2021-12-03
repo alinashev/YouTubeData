@@ -8,7 +8,8 @@ from Load.Loader import Loader
 class VideoCategoryLoader(Loader):
     def load(self, list_for_load: list) -> None:
         try:
-            connect: Any = DataBase.connect()
+            data_base: DataBase = DataBase()
+            connect: Any = data_base.connect()
             cursor: Any = connect.cursor()
 
             for obj in list_for_load:
@@ -22,5 +23,6 @@ class VideoCategoryLoader(Loader):
                 cursor.execute(insert_query)
                 connect.commit()
             logging.info('Successfully inserted')
+            data_base.close()
         except Exception as error:
             logging.error(error)

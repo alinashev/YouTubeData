@@ -6,4 +6,3 @@ class Parser(ABC):
     @abstractmethod
     def parse(self, json_string: Any, ChannelsID: dict) -> list:
         pass
-
