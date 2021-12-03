@@ -3,12 +3,16 @@ import os
 from typing import Any
 
 import boto3
-from Settings.awsSettings import *
+from Settings import awsSettings
 
 
 class StorageS3:
 
-    def __init__(self, bucket_name) -> None:
+    def __init__(self) -> None:
+        self.connect()
+
+    def connect(self, bucket_name='task-bucket-a', access_key_id=awsSettings.access_key_id,
+                secret_access_key=awsSettings.secret_access_key):
         self.__bucket_name = bucket_name
         self.s3 = boto3.resource('s3',
                                  aws_access_key_id=access_key_id,

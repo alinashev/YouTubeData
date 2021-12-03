@@ -3,14 +3,16 @@ from typing import Any
 
 import psycopg2
 from psycopg2 import Error
-from Settings.databaseSettings import *
+
+from Settings import databaseSettings
 
 
 class DataBase:
     def __init__(self) -> None:
         self.__connection = None
 
-    def connect(self) -> Any:
+    def connect(self, user=databaseSettings.user, password=databaseSettings.password,
+                database=databaseSettings.database, host=databaseSettings.host, port=databaseSettings.port) -> Any:
         if not self.__connection:
             logging.info('Establishing connection...')
             try:
