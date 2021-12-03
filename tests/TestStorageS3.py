@@ -1,5 +1,4 @@
 import unittest
-from typing import Any
 
 from Commons.StorageS3 import StorageS3
 
@@ -7,7 +6,7 @@ from Commons.StorageS3 import StorageS3
 class TestStorageS3(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.storage = StorageS3('task-bucket-a')
+        self.storage = StorageS3()
         self.storage.download_folder("YouTube")
         self.result_path_list: list = self.storage.get_path_list()
 
