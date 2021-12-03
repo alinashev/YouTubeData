@@ -3,7 +3,7 @@ import os
 from typing import Any
 
 import boto3
-from Settings import settings
+from Settings.awsSettings import *
 
 
 class StorageS3:
@@ -11,8 +11,8 @@ class StorageS3:
     def __init__(self, bucket_name) -> None:
         self.__bucket_name = bucket_name
         self.s3 = boto3.resource('s3',
-                                 aws_access_key_id=settings.aws_access_key_id,
-                                 aws_secret_access_key=settings.aws_secret_access_key)
+                                 aws_access_key_id=access_key_id,
+                                 aws_secret_access_key=secret_access_key)
 
     def download_folder(self, destination_directory: str) -> None:
         self.__downloaded_directory = destination_directory
