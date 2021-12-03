@@ -8,7 +8,8 @@ from Extract.DataExtractor import DataExtractor
 
 class ChannelDataExtractor(DataExtractor):
 
-    __youtube: Any = build('youtube', 'v3', developerKey=settings.you_tube_API_key)
+    def __init__(self) -> None:
+        self.__youtube: Any = build('youtube', 'v3', developerKey=settings.you_tube_API_key)
 
     def extract(self, ChannelsID: dict) -> dict:
         list_req: list = list()

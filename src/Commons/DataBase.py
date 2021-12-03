@@ -7,36 +7,29 @@ import settings
 
 
 class DataBase:
-    __connection: None = None
+    def __init__(self) -> None:
+        self.__connection = None
 
-    __user: str = settings.rds_user
-    __password: str = settings.rds_password
-    __database: str = settings.rds_database
-    __host: str = settings.rds_host
-    __port: str = settings.rds_port
-
-    @classmethod
-    def connect(cls) -> Any:
-        if not cls.__connection:
+    def connect(self) -> Any:
+        if not self.__connection:
             logging.info('Establishing connection...')
             try:
-                cls.__connection = psycopg2.connect(user=cls.__user,
-                                                    password=cls.__password,
-                                                    database=cls.__database,
-                                                    host=cls.__host,
-                                                    port=cls.__port)
+                self.__connection = psycopg2.connect(user=settings.rds_user,
+                                                     password=settings.rds_password,
+                                                     database=settings.rds_database,
+                                                     host=settings.rds_host,
+                                                     port=settings.rds_port)
             except (Exception, Error) as error:
                 logging.error(error)
 
         else:
             logging.info('Connection established')
-        return cls.__connection
+        return self.__connection
 
-    @classmethod
-    def close(cls) -> None:
+    def close(self) -> None:
         try:
-            if cls.__connection:
+            if self.__connection:
                 logging.info('Close connection')
-                cls.__connection.close()
+                self.__connection.close()
         except (Exception, Error) as error:
             logging.error(error)

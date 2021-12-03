@@ -7,16 +7,16 @@ import settings
 
 
 class StorageS3:
-    __s3: Any = boto3.resource('s3',
-                               aws_access_key_id=settings.aws_access_key_id,
-                               aws_secret_access_key=settings.aws_secret_access_key)
 
-    def __init__(self, bucket_name):
+    def __init__(self, bucket_name) -> None:
         self.__bucket_name = bucket_name
+        self.s3 = boto3.resource('s3',
+                                 aws_access_key_id=settings.aws_access_key_id,
+                                 aws_secret_access_key=settings.aws_secret_access_key)
 
     def download_folder(self, destination_directory: str) -> None:
         self.__downloaded_directory = destination_directory
-        bucket: Any = self.__s3.Bucket(self.__bucket_name)
+        bucket: Any = self.s3.Bucket(self.__bucket_name)
         for obj in bucket.objects.filter(Prefix='Resources'):
             if destination_directory is False:
                 self.__path = obj.key
@@ -43,6 +43,6 @@ class StorageS3:
         return path_list
 
     def upload(self, file_name: str) -> None:
-        self.__s3.meta.client.upload_file(file_name, self.__bucket_name,
-                                          'Resources/Lake/jsonTypesFile/YouTube/{name}'.format(name=file_name))
+        self.s3.meta.client.upload_file(file_name, self.__bucket_name,
+                                        'Resources/Lake/jsonTypesFile/YouTube/{name}'.format(name=file_name))
         logging.info("Pulled data has been loaded into S3")

@@ -4,6 +4,7 @@ from Extract.ChannelDataExtractor import ChannelDataExtractor
 
 
 class TestChannelDataExtractor(unittest.TestCase):
+
     def setUp(self) -> None:
         self.channel_id = {line.split()[0]: line.split()[1] for line in open('resources/channels.txt')}
 

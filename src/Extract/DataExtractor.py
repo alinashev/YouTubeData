@@ -5,5 +5,5 @@ from typing import Any
 class DataExtractor(ABC):
 
     @abstractmethod
-    def extract(self, ChannelsID:dict) -> Any:
+    def extract(self, ChannelsID: dict) -> Any:
         pass

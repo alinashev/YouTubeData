@@ -3,7 +3,6 @@ from datetime import datetime
 
 import settings
 from Commons.ChannelsID import ChannelsID
-from Commons.DataBase import DataBase
 from Commons.FileWriter import FileWriter
 from Commons.ReaderJSON import ReaderJSON
 from Commons.StorageS3 import StorageS3
@@ -54,8 +53,6 @@ def main():
 
     ChannelLoader().load(ChannelParser().parse(json_channels, channel_id))
     VideoLoader().load(VideoParser().parse(json_video, channel_id))
-
-    DataBase.close()
 
 
 if __name__ == '__main__':

@@ -5,11 +5,10 @@ from Commons.StorageS3 import StorageS3
 
 
 class TestStorageS3(unittest.TestCase):
-    directory: str = "YouTube"
 
     def setUp(self) -> None:
         self.storage = StorageS3('task-bucket-a')
-        self.storage.download_folder(self.directory)
+        self.storage.download_folder("YouTube")
         self.result_path_list: list = self.storage.get_path_list()
 
     def test_existence_dataChannels(self) -> None:
