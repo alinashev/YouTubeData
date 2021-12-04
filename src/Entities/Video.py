@@ -1,10 +1,4 @@
 class Video:
-    channel_name: str
-    channel_id: str
-    video_id: str
-    published_at: str
-    title: str
-    description: str
 
     def __init__(self, channel_name: str, channel_id: str, video_id: str, published_at: str, title: str,
                  description: str) -> None:
