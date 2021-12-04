@@ -7,11 +7,6 @@ from Transform.VideoParser import VideoParser
 
 class TestVideoParser(unittest.TestCase):
 
-    channel_id: dict
-    video_parser: VideoParser
-    method_result: list
-    list_of_type_result: list
-
     def setUp(self) -> None:
         with open('resources/dataVideos.json', 'r', encoding='utf-8') as f:
             self.json_video = json.load(f)
