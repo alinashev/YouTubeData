@@ -1,15 +1,20 @@
 class Analyzer:
-    def get_category(self, ChannelsID: dict, category_list: list) -> dict:
-        category_for_channel: list = list()
-        total_category: list = list()
+    def get_category(self, channel_id: dict, category_id: dict, category_list: list) -> dict:
+        channel_list: list = list(map(lambda c: c, channel_id))
+        channel_category_dict: dict[str, list] = {j: list() for j in channel_list}
+        for i in category_list:
+            name = i.get_channel_name()
+            if name in channel_category_dict:
+                channel_category_dict[name].append(i.get_video_category_id())
 
-        for ch in ChannelsID:
-            for category in category_list:
-                if ch != category.get_channel_name():
-                    continue
-                category_for_channel.append(category.get_video_category_id())
-            category_for_channel = list(filter(lambda a: a != 'None', category_for_channel))
-            total_category.append(max(category_for_channel, key=category_for_channel.count))
-            category_for_channel.clear()
-        return dict(zip(list(map(lambda c: c, ChannelsID)), total_category))
+        for i in channel_category_dict:
+            channel_category_dict[i] = list(filter(lambda a: a != 'None', channel_category_dict[i]))
+            total = max(channel_category_dict[i], key=channel_category_dict[i].count)
+            channel_category_dict[i].clear()
+            channel_category_dict[i].append(total)
 
+            id = channel_category_dict[i][0]
+            if id in category_id:
+                channel_category_dict[i].append(category_id[id])
+
+        return channel_category_dict

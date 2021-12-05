@@ -3,6 +3,7 @@ import logging
 from datetime import datetime
 from Action.Action import Action
 from Analysis.Analyzer import Analyzer
+from Commons.CategoriesID import CategoriesID
 from Commons.ChannelsID import ChannelsID
 from Commons.FileWriter import FileWriter
 from Commons.ReaderJSON import ReaderJSON
@@ -46,10 +47,11 @@ class DataReporter(Action):
         VideoCategoryLoader().load(category_list)
 
         channel_id: dict = ChannelsID('channels.txt').get_channels_id()
+        category_id: dict = CategoriesID('categories.txt').get_categories_description()
 
         report_file_writer = FileWriter('report.json')
         analyzer: Analyzer = Analyzer()
-        report_file_writer.writing(analyzer.get_category(channel_id, category_list))
+        report_file_writer.writing(analyzer.get_category(channel_id, category_id, category_list))
 
         report = Reporter(report_file_writer.get_path(), report_settings.email_recipient)
 
