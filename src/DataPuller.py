@@ -1,10 +1,9 @@
 import logging
-import settings
 
+from Settings import settings
 from datetime import datetime
 from Action.Action import Action
 from Commons.ChannelsID import ChannelsID
-from Commons.DataBase import DataBase
 from Commons.FileWriter import FileWriter
 from Commons.ReaderJSON import ReaderJSON
 from Commons.StorageS3 import StorageS3
@@ -34,14 +33,15 @@ class DataPuller(Action):
         extractor_channels: ChannelDataExtractor = ChannelDataExtractor()
         extractor_videos: VideoDataExtractor = VideoDataExtractor()
 
-        file_writer: FileWriter = FileWriter()
         storage: StorageS3 = StorageS3()
 
-        file_writer.writing(extractor_channels.extract(channel_id), 'dataChannels.json')
-        storage.upload(file_writer.get_path())
+        file_writer_channels: FileWriter = FileWriter('dataChannels.json')
+        file_writer_channels.writing(extractor_channels.extract(channel_id))
+        storage.upload(file_writer_channels.get_path())
 
-        file_writer.writing(extractor_videos.extract(channel_id), 'dataVideos.json')
-        storage.upload(file_writer.get_path())
+        file_writer_videos: FileWriter = FileWriter('dataVideos.json')
+        file_writer_videos.writing(extractor_videos.extract(channel_id))
+        storage.upload(file_writer_videos.get_path())
 
         storage.download_folder("YouTube")
 
@@ -55,5 +55,3 @@ class DataPuller(Action):
 
         ChannelLoader().load(ChannelParser().parse(json_channels, channel_id))
         VideoLoader().load(VideoParser().parse(json_video, channel_id))
-
-        DataBase.close()
