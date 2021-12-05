@@ -1,20 +1,17 @@
 from threading import Timer
-from typing import Any
 
 
 class Repeater(object):
-    timer: Timer = None
-    interval: int
-    function: Any
-    args: tuple
-    kwargs: dict
-    is_running: bool = False
 
-    def repeat(self, interval, function, *args, **kwargs) -> None:
-        self.interval = interval
-        self.function = function
-        self.args = args
+    def __init__(self, interval, function, *args, **kwargs) -> None:
         self.kwargs = kwargs
+        self.args = args
+        self.function = function
+        self.interval = interval
+        self.is_running = False
+        self.timer = None
+
+    def repeat(self) -> None:
         self.run()
 
     def run(self) -> None:

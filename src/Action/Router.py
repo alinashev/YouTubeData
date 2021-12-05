@@ -3,9 +3,6 @@ from DataPuller import DataPuller
 
 
 class Router:
-    menu: dict
-    version: int
-
     def __init__(self, version: int) -> None:
         self.version = version
 

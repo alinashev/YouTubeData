@@ -1,11 +1,9 @@
 import logging
-import settings
 
 from datetime import datetime
 from Action.Action import Action
 from Analysis.Analyzer import Analyzer
 from Commons.ChannelsID import ChannelsID
-from Commons.DataBase import DataBase
 from Commons.FileWriter import FileWriter
 from Commons.ReaderJSON import ReaderJSON
 from Commons.StorageS3 import StorageS3
@@ -14,6 +12,7 @@ from Extract.VideoExtractorFromDB import VideoExtractorFromDB
 from Load.VideoCategoryLoader import VideoCategoryLoader
 from Report.Repeater import Repeater
 from Report.Reporter import Reporter
+from Settings import settings, report_settings
 from Transform.CategoryParser import CategoryParser
 
 
@@ -31,30 +30,28 @@ class DataReporter(Action):
                             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
         video_from_db: VideoExtractorFromDB = VideoExtractorFromDB()
-        video_list_db: list = video_from_db.extract_from_bd()
+        video_list_db: list = video_from_db.extract()
 
         storage: StorageS3 = StorageS3()
-        file_writer: FileWriter = FileWriter()
+        file_writer: FileWriter = FileWriter('videoCategory.json')
         video_category_extractor: VideoCategoryExtractor = VideoCategoryExtractor()
 
-        file_name: str = 'videoCategory.json'
-        file_writer.writing(video_category_extractor.extract(video_list_db), file_name)
+        file_writer.writing(video_category_extractor.extract(video_list_db))
         storage.upload(file_writer.get_path())
 
-        reader: ReaderJSON = ReaderJSON(file_name)
+        reader: ReaderJSON = ReaderJSON(file_writer.get_path())
         json_category: dict = reader.get_json()
 
         category_list: list = CategoryParser().parse(json_category, video_list_db)
-
         VideoCategoryLoader().load(category_list)
-        DataBase.close()
 
         channel_id: dict = ChannelsID('channels.txt').get_channels_id()
 
-        report_file_name: str = "report.json"
+        report_file_writer = FileWriter('report.json')
         analyzer: Analyzer = Analyzer()
-        file_writer.writing(analyzer.get_category(channel_id, category_list), report_file_name)
+        report_file_writer.writing(analyzer.get_category(channel_id, category_list))
 
-        repeater = Repeater()
-        report = Reporter(report_file_name, settings.email_recipient)
-        repeater.repeat(3600, lambda *args, **kwargs: report.send())
+        report = Reporter(report_file_writer.get_path(), report_settings.email_recipient)
+
+        repeater = Repeater(3600, lambda *args, **kwargs: report.send())
+        repeater.repeat()
