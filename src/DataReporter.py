@@ -33,12 +33,10 @@ class DataReporter(Action):
         video_from_db: VideoExtractorFromDB = VideoExtractorFromDB()
         video_list_db: list = video_from_db.extract()
 
-        storage: StorageS3 = StorageS3()
         file_writer: FileWriter = FileWriter('videoCategory.json')
         video_category_extractor: VideoCategoryExtractor = VideoCategoryExtractor()
 
         file_writer.writing(video_category_extractor.extract(video_list_db))
-        storage.upload(file_writer.get_path())
 
         reader: ReaderJSON = ReaderJSON(file_writer.get_path())
         json_category: dict = reader.get_json()

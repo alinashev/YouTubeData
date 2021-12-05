@@ -2,7 +2,7 @@ from Action.Router import Router
 
 
 def main():
-    router = Router(2)
+    router = Router(int(input()))
     router.generate_menu()
     router.selection_version()
 
