@@ -1,4 +1,3 @@
-venv/Lib
+.venv/
 .idea/
-
-src/Settings/
+Settings/

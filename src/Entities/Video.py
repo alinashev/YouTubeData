@@ -21,3 +21,12 @@ class Video:
                                                       published_at=self.published_at,
                                                       title=self.title,
                                                       description=self.description)
+
+    def get_channel_name(self) -> str:
+        return self.channel_name
+
+    def get_channel_id(self) -> str:
+        return self.channel_id
+
+    def get_video_id(self) -> str:
+        return self.video_id
