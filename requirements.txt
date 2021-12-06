@@ -1,0 +1,5 @@
+psycopg2
+boto3
+setuptools
+google-api-python-client
+psycopg-binary

@@ -1,4 +1,3 @@
-venv/Lib
+.venv/
 .idea/
-
-settings.py
+Settings/

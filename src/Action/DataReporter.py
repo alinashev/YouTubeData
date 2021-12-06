@@ -7,7 +7,6 @@ from Commons.CategoriesID import CategoriesID
 from Commons.ChannelsID import ChannelsID
 from Commons.FileWriter import FileWriter
 from Commons.ReaderJSON import ReaderJSON
-from Commons.StorageS3 import StorageS3
 from Extract.VideoCategoryExtractor import VideoCategoryExtractor
 from Extract.VideoExtractorFromDB import VideoExtractorFromDB
 from Load.VideoCategoryLoader import VideoCategoryLoader
@@ -44,8 +43,8 @@ class DataReporter(Action):
         category_list: list = CategoryParser().parse(json_category, video_list_db)
         VideoCategoryLoader().load(category_list)
 
-        channel_id: dict = ChannelsID('channels.txt').get_channels_id()
-        category_id: dict = CategoriesID('categories.txt').get_categories_description()
+        channel_id: dict = ChannelsID('../channels.txt').get_channels_id()
+        category_id: dict = CategoriesID('../categories.txt').get_categories_description()
 
         report_file_writer = FileWriter('report.json')
         analyzer: Analyzer = Analyzer()
