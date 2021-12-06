@@ -4,29 +4,25 @@ import ssl
 from datetime import datetime
 from email import encoders
 from email.mime.base import MIMEBase
-from typing import Any
 from Settings import settings, report_settings
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 
 class Reporter:
-    file: Any
-    recipient: str
-
     def __init__(self, file, recipient) -> None:
         self.file = file
         self.recipient = recipient
 
     def send(self) -> None:
         time: datetime = datetime.utcnow()
-        subject: str = 'Report: {year}-{month}-{day}-{hour}-{minute}-{second}'.format(year=time.year,
-                                                                                      month=time.month,
-                                                                                      day=time.day,
-                                                                                      hour=time.hour,
-                                                                                      minute=time.minute,
-                                                                                      second=time.second
-                                                                                      )
+        subject: str = settings.subject.format(year=time.year,
+                                               month=time.month,
+                                               day=time.day,
+                                               hour=time.hour,
+                                               minute=time.minute,
+                                               second=time.second
+                                               )
         body: str = 'report'
 
         message: MIMEMultipart = MIMEMultipart()

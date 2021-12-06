@@ -1,8 +1,7 @@
 from threading import Timer
 
 
-class Repeater(object):
-
+class Repeater:
     def __init__(self, interval, function, *args, **kwargs) -> None:
         self.kwargs = kwargs
         self.args = args
