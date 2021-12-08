@@ -1,4 +1,3 @@
-from Action.DBStructureCreator import DBStructureCreator
 from Action.DataReporter import DataReporter
 from Action.DataPuller import DataPuller
 
@@ -8,9 +7,8 @@ class Router:
         self.version = version
 
     def generate_menu(self) -> None:
-        self.menu = {1: DBStructureCreator(),
-                     2: DataPuller(),
-                     3: DataReporter()}
+        self.menu = {1: DataPuller(),
+                     2: DataReporter()}
 
     def selection_version(self) -> None:
         self.menu[self.version].execute()
