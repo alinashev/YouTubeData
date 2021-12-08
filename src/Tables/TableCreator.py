@@ -5,7 +5,7 @@ from Commons.DataBase import DataBase
 
 
 class TableCreator:
-    def create_all_tables(self, file):
+    def create_all_tables(self, file: str) -> None:
         try:
             data_base: DataBase = DataBase()
             connect: Any = data_base.connect()
